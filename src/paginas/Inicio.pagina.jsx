@@ -1,4 +1,5 @@
 import Filtros from "../componentes/personagens/filtros.componente";
+
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
 
@@ -10,12 +11,18 @@ import Paginacao from "../componentes/paginacao/paginacao.componente";
  *
  * @returns Página inicio
  */
+
+
 const PaginaInicio = () => {
+
+
+
+
   return (
     <div className="container">
       <div className="actions">
         <h3>Catálogo de Personagens</h3>
-        <button className="danger">Test Button</button>
+        <button className="danger">Limpar filtro</button>
       </div>
       <Filtros />
       <Paginacao />

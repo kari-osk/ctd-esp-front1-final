@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import BotaoFavorito from "../botoes/botao-favorito.componente";
 import "./card-personagem.css";
+
 
 /**
  * Card para cada personagem dentro da grade de personagem.
@@ -9,16 +11,20 @@ import "./card-personagem.css";
  *
  * @returns Elemento JSX
  */
-const CardPersonagem = () => {
+const CardPersonagem = (character) => {
+
   return (
-    <div className="card-personagem">
+    <div className="card-personagem" key={character.id}>
+      <h1>teste</h1>
       <img
-        src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-        alt="Rick Sanchez"
+        src={character.image}
+        alt={character.name}
       />
       <div className="card-personagem-body">
-        <span>Rick Sanchez</span>
-        <BotaoFavorito isFavorito={false} />
+        <span>{character.name}</span>
+        <Link to={`favoritos${character.id}`}>
+          <BotaoFavorito isFavorito={false} />
+        </Link>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const PaginaFavoritos = () => {
     <div className="container">
       <div className="actions">
         <h3>Personagens Favoritos</h3>
-        <button className="danger">Test Button</button>
+        <button className="danger">Limpar filtro</button>
       </div>
       <GradePersonagens />
     </div>

@@ -1,6 +1,14 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { searchCharacterSelector, setSearch } from '../../features/character/characterSlice';
 import "./filtros.css";
 
 const Filtros = () => {
+
+  const dispatch = useDispatch()
+  const search = useSelector(searchCharacterSelector)
+
+
+
   return (
     <div className="filtros">
       <label for="nome">Filtrar por nome:</label>
@@ -8,6 +16,10 @@ const Filtros = () => {
         type="text"
         placeholder="Rick, Morty, Beth, Alien, ...etc"
         name="nome"
+        value={search}
+        onChange={(event) => {
+          dispatch(setSearch(event.target.value))
+        }}
       />
     </div>
   );
