@@ -1,11 +1,15 @@
 import Filtros from "../componentes/personagens/filtros.componente";
-
-import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
+import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { availableCharacterSelector, fetchAsyncCharacters  } from '../features/character/characterSlice';
+import { isLoadingSelector } from '../features/character/characterSlice';
+import Spinner from 'react-bootstrap/Spinner'
+import './Pagina.css'
 
 /**
- * Esta é a página principal. Aqui você deve ver o painel de filtro junto com a grade de personagens.
- *
+ * Esta é a página principal.
  * Uso:
  * ``` <PaginaInicio /> ```
  *
@@ -15,6 +19,16 @@ import Paginacao from "../componentes/paginacao/paginacao.componente";
 
 const PaginaInicio = () => {
 
+  const dispatch = useDispatch()
+
+  const isLoading = useSelector(isLoadingSelector)
+  
+  const available = useSelector(availableCharacterSelector)
+  // const pageNumber = useSelector()
+
+  useEffect(() => {
+    dispatch(fetchAsyncCharacters())
+  }, [])
 
 
 
@@ -26,7 +40,10 @@ const PaginaInicio = () => {
       </div>
       <Filtros />
       <Paginacao />
-      <GradePersonagens />
+      <div className='spinner' >
+        {isLoading ? <Spinner animation='border' variant='primary'/> : null}
+      </div>
+      <GradePersonagens selector={availableCharacterSelector} />
       <Paginacao />
     </div>
   );

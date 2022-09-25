@@ -1,8 +1,8 @@
-import "./grade-personagem.css";
-import CardPersonagem from "./card-personagem.componente";
-import { useSelector } from 'react-redux';
-import { availableCharacterSelector } from '../../features/character/characterSlice';
 
+import CardPersonagem from "./card-personagem.componente";
+import { useSelector} from 'react-redux';
+import { Col, Row } from 'react-bootstrap';
+import "./grade-personagem.css";
 
 /**
  * Grade de personagens para a página inicial
@@ -12,18 +12,23 @@ import { availableCharacterSelector } from '../../features/character/characterSl
  *
  * @returns Elemento JSX
  */
-const GradePersonagem = () => {
+const GradePersonagem = ({selector}) => {
 
-  const characters = useSelector(availableCharacterSelector)
+  const characters = useSelector(selector)
+  
+  // console.log("grade personagem", characters)
+
 
   return (
-    <div>
-      {
-        characters.map((character) => (
+    <div className='grade-personagens'>
+      <Row mb={2}>
+      {characters.map((character) => (
+        <Col sm={12} md={6} lg={4}>
           <CardPersonagem key={character.id} character={character} />
+        </Col>
         ))
-      }
-      <h1>teste</h1>
+        }
+      </Row>
     </div>
   )
 }

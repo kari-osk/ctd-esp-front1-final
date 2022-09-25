@@ -1,4 +1,4 @@
-import "./Detalhe.css";
+import "./Pagina.css";
 import BotaoFavorito from "../componentes/botoes/botao-favorito.componente";
 import CardEpisodio from "../componentes/episodios/card-episodio.componente";
 
@@ -15,6 +15,7 @@ import CardEpisodio from "../componentes/episodios/card-episodio.componente";
  * @returns Página de detalhe
  */
 const PaginaDetalhe = () => {
+  
   return (
     <div className="container">
       <h3>Rick Sanchez</h3>

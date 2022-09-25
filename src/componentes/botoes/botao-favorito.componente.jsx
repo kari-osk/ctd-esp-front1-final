@@ -1,18 +1,45 @@
 import "./botao-favorito.css";
+import star from '../../image/star.png'
+import starFilled from '../../image/star-filled.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { addCharacter, getFavorite, removeCharacter, selectedCharacterSelector } from '../../features/character/characterSlice';
+
+
 /**
  * Botão que indica se um elemento é favorito ou não, e dá a possibilidade de marcá-lo/desmarcá-lo
- *
- * Terá que tipar as propriedades se utilizar este componente
- *
+ * Função handleClick verifica se o personagem selecionado possui o id, se sim dispara a função de remover o elemento, se não adiciona o elemento de   favorito 
+ * 
  *
  * @returns Elemento JSX
  */
-const BotaoFavorito = ({ isFavorito, onClick }) => {
-  const src = isFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png";
+const BotaoFavorito = ({ isFavorito, favoriteId }) => {
+
+  const dispatch = useDispatch()
+  const selectedCharacter = useSelector(selectedCharacterSelector)
+
+  const handleClick = () => {
+    if (selectedCharacter.includes(favoriteId)) {
+      dispatch(removeCharacter(favoriteId))
+      dispatch(getFavorite())
+    } else {
+      dispatch(addCharacter(favoriteId))
+      dispatch(getFavorite())
+    }
+  }
 
   return (
     <div className="botao-favorito">
-      <img src={src} alt={"favorito"} />
+      {isFavorito ? (
+        <button className='botao-favorito' onClick={handleClick}>
+          <img  src={starFilled} alt="Não é favorito"/>
+        </button>
+        ) 
+      : (
+        <button className='botao-favorito'onClick={handleClick}>
+          <img src={star} alt="Favorito"/>
+        </button>
+        )
+      }
     </div>
   );
 };

@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { searchCharacterSelector, setSearch } from '../../features/character/characterSlice';
+import { fetchAsyncCharacters, searchCharacterSelector, setSearch } from '../../features/character/characterSlice';
 import "./filtros.css";
 
 const Filtros = () => {
 
   const dispatch = useDispatch()
   const search = useSelector(searchCharacterSelector)
-
 
 
   return (
@@ -19,6 +18,7 @@ const Filtros = () => {
         value={search}
         onChange={(event) => {
           dispatch(setSearch(event.target.value))
+          dispatch(fetchAsyncCharacters())
         }}
       />
     </div>

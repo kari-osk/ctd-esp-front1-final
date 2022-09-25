@@ -5,6 +5,7 @@ import PaginaDetalhe from "./paginas/Detalhe.pagina";
 import Cabecalho from "./componentes/layout/cabecalho.componente";
 import './App.css';
 
+
 function App() {
   return (
     <div className="App">

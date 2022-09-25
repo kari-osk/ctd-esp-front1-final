@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectedCharacterSelector } from '../../features/character/characterSlice';
 import BotaoFavorito from "../botoes/botao-favorito.componente";
 import "./card-personagem.css";
 
@@ -11,20 +12,32 @@ import "./card-personagem.css";
  *
  * @returns Elemento JSX
  */
-const CardPersonagem = (character) => {
+const CardPersonagem = ({character}) => {
+
+  const isFavorite = useSelector(selectedCharacterSelector)
+
+  const favorite = (characterName) => {
+    if (isFavorite.toString().includes(characterName)) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   return (
     <div className="card-personagem" key={character.id}>
-      <h1>teste</h1>
       <img
         src={character.image}
         alt={character.name}
       />
       <div className="card-personagem-body">
         <span>{character.name}</span>
-        <Link to={`favoritos${character.id}`}>
-          <BotaoFavorito isFavorito={false} />
-        </Link>
+
+          <BotaoFavorito 
+            isFavorito={favorite(character.id)}
+            favoriteId={character.id}
+          />
+
       </div>
     </div>
   );
