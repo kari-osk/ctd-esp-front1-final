@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * CreateSlice possui o estado inicial, funções redutoras e os seus tipos de ações correspondendes. 
+ */
+
 //Slice 
 const characterSlice = createSlice({
   name: 'character',
@@ -38,12 +42,6 @@ const characterSlice = createSlice({
     clearFavorite: (state) => {
       state.favoriteList = []
     },
-    previousPage: (state) => {
-      if(state.page > 1) state.page -= 1  
-    },
-    nextPage: (state) => {
-      if(state.response.info?.next) state.page += 1  
-    }
   },
 })
 
@@ -72,29 +70,9 @@ export const setIsFavorite = (isFavorite) => ({ type: 'character/setIsFavorite',
 export const setFavoriteList = (favoriteList) => ({ type: 'character/setFavoriteList', payload: favoriteList})
 export const getFavorites = () => ({ type: 'character/getFavorites'})
 export const clearFavorite = () => ({ type: 'character/clearFavorite'})
-export const previousPage = () => ({ type: 'character/previousPage', payload: previousPage})
-export const nextPage = () => ({ type: 'character/nextPage', payload: nextPage})
 
 
 //Reducer
 export default characterSlice.reducer;
 
 
-
-
-
-
-
-
-//Thunk
-// export function fetAsyncCharacters(id) {
-//   return async function (dispatch) {
-//     dispatch(setIsLoading(true))
-
-//     const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
-//     const data = await response.json();
-
-//     dispatch(setAvailableCharacters(data.results))
-//     dispatch(setIsLoading(false))
-//   }
-// };

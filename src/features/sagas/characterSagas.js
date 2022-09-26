@@ -1,11 +1,15 @@
-import {  setAvailableCharacters, setIsLoading, searchCharacterSelector, pageSelector, nameStartWithSelector } from '../character/characterSlice'
 import { call, put, takeLatest, select } from 'redux-saga/effects'
+import {  setAvailableCharacters, setIsLoading, searchCharacterSelector, selectedCharacterSelector } from '../character/characterSlice'
+
+/**
+ *  Função geradora Saga.
+ *  Para buscar todos os personagens e realizar o filtro por nome.
+ */
 
 
 export function* fetchAsyncCharacters() {
   yield put(setIsLoading(true))
   const search = yield select(searchCharacterSelector)
-  const page = yield select(pageSelector)
 
 
   let baseUrl = 'https://rickandmortyapi.com/api/character'
@@ -31,7 +35,16 @@ export function* fetchAsyncCharacters() {
   }
 }
 
+// export function* fetchDetails() {
+//   yield put(setIsLoading(true))
+//   const details = yield select(selectedCharacterSelector)
 
+//   let baseUrl = 'https://rickandmortyapi.com/api/episode'
+//   if (details) {
+//     baseUrl = `${baseUrl}?id=${details.id}`
+//   }
+
+// }
 
 
 export default function* characterSagas() {

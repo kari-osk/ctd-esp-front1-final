@@ -1,36 +1,37 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CardPersonagem from '../componentes/personagens/card-personagem.componente';
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
-import { favoriteListSelector, clearFavorite, getFavorites, availableCharacterSelector } from '../features/character/characterSlice';
+import { favoriteListSelector, clearFavorite, getFavorites, removeCharacter } from '../features/character/characterSlice';
 
 import './Pagina.css'
+
 /**
- * Esta é a página de favoritos. Aqui são apresentados todos os personagens marcados como favoritos
- *
- * Função handleClearFavorite: serve para tirar os personagens da lista de favoritos
+ * Esta é a página de favoritos. Aqui são apresentados todos os personagens marcados como favoritos, caso não haja favoritos é mostrado a mensageam "Ainda não tem personagem favorito" e o botão para voltar a página Inicio. 
  *
  * Uso:
  * ``` <PaginaFavoritos /> ```
  *
  * @returns Página de favoritos
+ * 
+ * Função: handleClearFavorite serve para limpar a lista de personagens favoritos
+ * 
  */
+
 const PaginaFavoritos = () => {
 
   const dispatch = useDispatch()
   const favorites = useSelector(favoriteListSelector)
-  // const character = useSelector(availableCharacterSelector)
-
   const hasFavorite = favorites.length
 
   useEffect(() => {
     dispatch(getFavorites())
   }, [dispatch])
 
-  const handleClearFavorite = () =>{
+ 
+  const handleClearFavorite = (favoriteId) =>{
     dispatch(clearFavorite())
-    // dispatch(getFavorites())
+    dispatch(removeCharacter(favoriteId))
   }
 
   return (
@@ -43,15 +44,20 @@ const PaginaFavoritos = () => {
         >
         Limpar filtro
         </button>
-        </div>
-        { hasFavorite 
-          ?
-            <GradePersonagens data={favorites} /> 
-          : <div className='favorite_msg'>
-              <h3>Não tem personagem favorito</h3>
-              <button className='primary'><Link to='/' className='link_home_btn'>Escolha na página inicial</Link></button>
-            </div> 
-        }
+      </div>
+
+
+      { hasFavorite
+        ?
+        <GradePersonagens data={favorites} /> 
+        : 
+        <div className='favorite_msg'>
+          <h3>Ainda não tem personagem favorito</h3>
+          <button className='primary'>
+            <Link to='/' className='link_home_btn'>Escolha na página ínicio</Link>
+          </button>
+        </div> 
+      }
     </div>
   );
 };

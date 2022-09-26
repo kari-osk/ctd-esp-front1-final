@@ -14,17 +14,15 @@ import './Pagina.css'
  * ``` <PaginaInicio /> ```
  *
  * @returns Página inicio
+ * 
+ * Função: handleClearSearch, serve para limpar o campo de busca de personagens. E retornar ao estado inicial com todos os personagens.
  *
- *  Função: handleClearSearch, serve para limpar o campo de busca de personagens. E retornar todos os personagens.
  */
-
 
 const PaginaInicio = () => {
 
   const dispatch = useDispatch()
-  // const isLoading = useSelector(isLoadingSelector)
 
-  //Parâmentros para a paginação 
   const [page, setPage] = useState(1)
   const cardsInPage = 9 
   const availableCharacters = useSelector(availableCharacterSelector)
@@ -33,17 +31,16 @@ const PaginaInicio = () => {
   const indexOfFirstCard = indexOfLastCard - cardsInPage 
   const currentCards = availableCharacters.slice(indexOfFirstCard, indexOfLastCard);
   const paginate = pagenumber => setPage(pagenumber)
-
-
-  useEffect(() => {
-    dispatch(fetchAsyncCharacters())
-  }, [dispatch])
+ 
 
   const handleClearSearch = () => {
-    // console.log('clicou no btn handleClearSearch')
     dispatch(setSearch(''))
     dispatch(fetchAsyncCharacters())
   }
+  
+  useEffect(() => {
+    dispatch(fetchAsyncCharacters())
+  }, [dispatch])
 
   return (
     <div className="container">
@@ -58,15 +55,15 @@ const PaginaInicio = () => {
       <Filtros/>
       <Loading />
       <Paginacao 
-							quantTotalCards={totalCards}
-							cardsInPage={cardsInPage}
-              paginate={paginate}
+				quantTotalCards={totalCards}
+				cardsInPage={cardsInPage}
+        paginate={paginate}
        />
       <GradePersonagens data={currentCards}/>
       <Paginacao 
-							quantTotalCards={totalCards}
-							cardsInPage={cardsInPage}
-              paginate={paginate}
+				quantTotalCards={totalCards}
+				cardsInPage={cardsInPage}
+        paginate={paginate}
        />
     </div>
   );

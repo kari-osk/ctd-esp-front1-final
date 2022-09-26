@@ -5,6 +5,10 @@ import PaginaDetalhe from "./paginas/Detalhe.pagina";
 import Cabecalho from "./componentes/layout/cabecalho.componente";
 import './App.css';
 
+/**
+ * Componente App com as rotas para todas as páginas.
+ * @returns 
+ */
 
 function App() {
   return (

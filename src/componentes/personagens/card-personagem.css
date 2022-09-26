@@ -1,6 +1,6 @@
 .card-personagem {
-  width:400px;
-  height:400px;
+  width:320px;
+  height:380px;
   display: flex;
   flex-direction: column;
   padding: 12px;

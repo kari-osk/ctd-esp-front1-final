@@ -1,7 +1,8 @@
 .grade-personagens {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
+  width: fit-content;
   justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
 }

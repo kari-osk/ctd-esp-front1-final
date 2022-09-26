@@ -14,6 +14,4 @@ export default configureStore({
     sagaMiddleware]
 })
 
-// export default store;
-
 sagaMiddleware.run(rootSagas)

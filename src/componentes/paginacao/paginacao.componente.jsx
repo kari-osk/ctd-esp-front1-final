@@ -3,11 +3,9 @@ import "./paginacao.css";
 /**
  * Componente que contém os botões para paginar os cards dos personagens
  *
- * 
- *
- *
  * @returns Elemento JSX
  */
+
 const Paginacao = ({quantTotalCards, cardsInPage, paginate}) => {
 
 	const totalPages = Math.ceil(quantTotalCards/ cardsInPage)

@@ -2,9 +2,10 @@ import { select, call, put, takeLatest} from 'redux-saga/effects'
 import { selectedCharacterSelector, setFavoriteList} from '../character/characterSlice'
 
 /**
- * Função geradora getFavorites()
+ * Função geradora Saga.
  * Realiza a busca na Api por todos os personagens e retorna com os selecionados como favoritos.
  */
+ 
 export function* getFavorites() {
   try {
     const selectedCharacter = yield select(selectedCharacterSelector)
