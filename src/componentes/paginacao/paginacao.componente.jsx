@@ -1,38 +1,39 @@
-import { useState } from 'react';
 import "./paginacao.css";
 
 /**
- * Componente que contém os botões para paginar
+ * Componente que contém os botões para paginar os cards dos personagens
  *
- * Você deve adicionar as propriedades necessárias para que funcione corretamente
+ * 
  *
  *
  * @returns Elemento JSX
  */
-const Paginacao = () => {
-  const [page, setPage] = useState(1)
+const Paginacao = ({quantTotalCards, cardsInPage, paginate}) => {
 
+	const totalPages = Math.ceil(quantTotalCards/ cardsInPage)
 
+ 	const pages = []
+
+	for (let i =1; i <= totalPages; i++) {
+  	pages.push(i)
+	}
 
   return (
     <div className="paginacao">
-      <button 
-        onClick={() => setPage((prev) => prev - 1)}
-        disabled={page === 1} 
-        className={"primary"}
-      >
-        Anterior
-      </button>
-
-      <button 
-        onClick={() => setPage((prev) => prev + 1)}
-        disabled={page === 3}
-        className={"primary"}
-       >
-        Próximo
-      </button>
+			{pages.map((pageNumber) => (
+				<div key={pageNumber}>
+					<button 
+						className={'primary'}
+						disabled={false}
+						onClick={() => paginate(pageNumber)}
+					>
+					{pageNumber}
+					</button>
+				</div>
+			))}
     </div>
   );
 };
+
 
 export default Paginacao;

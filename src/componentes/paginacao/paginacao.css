@@ -1,6 +1,8 @@
 .paginacao {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   margin: 10px 0;
+  padding: 4px;
+
 }

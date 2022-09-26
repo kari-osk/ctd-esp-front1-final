@@ -2,7 +2,7 @@ import "./botao-favorito.css";
 import star from '../../image/star.png'
 import starFilled from '../../image/star-filled.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { addCharacter, getFavorite, removeCharacter, selectedCharacterSelector } from '../../features/character/characterSlice';
+import { addCharacter, getFavorites, removeCharacter, selectedCharacterSelector } from '../../features/character/characterSlice';
 
 
 /**
@@ -20,10 +20,10 @@ const BotaoFavorito = ({ isFavorito, favoriteId }) => {
   const handleClick = () => {
     if (selectedCharacter.includes(favoriteId)) {
       dispatch(removeCharacter(favoriteId))
-      dispatch(getFavorite())
+      dispatch(getFavorites())
     } else {
       dispatch(addCharacter(favoriteId))
-      dispatch(getFavorite())
+      dispatch(getFavorites())
     }
   }
 

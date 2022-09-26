@@ -5,9 +5,9 @@ import "./card-personagem.css";
 
 
 /**
- * Card para cada personagem dentro da grade de personagem.
- *
- * Você precisará adicionar as propriedades necessárias para exibir os dados dos personagens
+ * Componente Card para cada personagem dentro da grade de personagem.
+ * 
+ * Através do click no BotaoFavorito, o personagem será favoritado ou não.
  *
  *
  * @returns Elemento JSX
@@ -27,11 +27,12 @@ const CardPersonagem = ({character}) => {
   return (
     <div className="card-personagem" key={character.id}>
       <img
+      className='card-personagem_img'
         src={character.image}
         alt={character.name}
       />
       <div className="card-personagem-body">
-        <span>{character.name}</span>
+        <h4>{character.name}</h4>
 
           <BotaoFavorito 
             isFavorito={favorite(character.id)}

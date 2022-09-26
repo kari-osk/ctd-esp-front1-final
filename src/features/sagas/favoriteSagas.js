@@ -1,25 +1,31 @@
-import { addCharacter, removeCharacter} from '../character/characterSlice'
-import { put, takeEvery} from 'redux-saga/effects'
+import { select, call, put, takeLatest} from 'redux-saga/effects'
+import { selectedCharacterSelector, setFavoriteList} from '../character/characterSlice'
 
-export function* addCharacterSaga(action) {
+/**
+ * Função geradora getFavorites()
+ * Realiza a busca na Api por todos os personagens e retorna com os selecionados como favoritos.
+ */
+export function* getFavorites() {
   try {
-    yield put(addCharacter(action.payload))
+    const selectedCharacter = yield select(selectedCharacterSelector)
+    
+    if (selectedCharacter.length > 0) {
+      const response = yield call(fetch,`https://rickandmortyapi.com/api/character/${selectedCharacter}`, 
+      {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    const data = yield response.json()
+    yield put(setFavoriteList(data))
+  }
   } catch (error) {
-    console.log(error)
+    console.log('favorite saga', error)
   }
 }
-
-export function* removeCharacterSaga(action) {
-  try {
-    yield put(removeCharacter(action.payload))
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 
 
 export function* favoriteSagas() {
-  yield takeEvery('favoriteCharacter/addCharacter', addCharacterSaga)
-  yield takeEvery('favoriteCharacter/removeCharacter', removeCharacterSaga)
+  yield takeLatest('character/getFavorites', getFavorites)
 }

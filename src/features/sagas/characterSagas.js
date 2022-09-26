@@ -1,13 +1,14 @@
-import {  setAvailableCharacters, setIsLoading, searchCharacterSelector, pageSelector } from '../character/characterSlice'
+import {  setAvailableCharacters, setIsLoading, searchCharacterSelector, pageSelector, nameStartWithSelector } from '../character/characterSlice'
 import { call, put, takeLatest, select } from 'redux-saga/effects'
+
 
 export function* fetchAsyncCharacters() {
   yield put(setIsLoading(true))
   const search = yield select(searchCharacterSelector)
   const page = yield select(pageSelector)
 
-  let baseUrl = 'https://rickandmortyapi.com/api/character'
 
+  let baseUrl = 'https://rickandmortyapi.com/api/character'
   if (search) {
     baseUrl = `${baseUrl}?name=${search}`
   }
@@ -28,10 +29,10 @@ export function* fetchAsyncCharacters() {
     yield put(setAvailableCharacters(data.results))
     yield put(setIsLoading(false))
   }
-
-
-
 }
+
+
+
 
 export default function* characterSagas() {
   yield takeLatest('character/fetchAsyncCharacters', fetchAsyncCharacters)

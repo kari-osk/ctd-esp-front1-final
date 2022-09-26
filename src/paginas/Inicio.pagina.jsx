@@ -1,11 +1,11 @@
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Filtros from "../componentes/personagens/filtros.componente";
 import Paginacao from "../componentes/paginacao/paginacao.componente";
 import GradePersonagens from "../componentes/personagens/grade-personagens.componente";
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { availableCharacterSelector, fetchAsyncCharacters  } from '../features/character/characterSlice';
-import { isLoadingSelector } from '../features/character/characterSlice';
-import Spinner from 'react-bootstrap/Spinner'
+import Loading from '../componentes/loading/loading';
+import { availableCharacterSelector, fetchAsyncCharacters, setSearch } from '../features/character/characterSlice';
+
 import './Pagina.css'
 
 /**
@@ -14,37 +14,60 @@ import './Pagina.css'
  * ``` <PaginaInicio /> ```
  *
  * @returns Página inicio
+ *
+ *  Função: handleClearSearch, serve para limpar o campo de busca de personagens. E retornar todos os personagens.
  */
 
 
 const PaginaInicio = () => {
 
   const dispatch = useDispatch()
+  // const isLoading = useSelector(isLoadingSelector)
 
-  const isLoading = useSelector(isLoadingSelector)
-  
-  const available = useSelector(availableCharacterSelector)
-  // const pageNumber = useSelector()
+  //Parâmentros para a paginação 
+  const [page, setPage] = useState(1)
+  const cardsInPage = 9 
+  const availableCharacters = useSelector(availableCharacterSelector)
+  const totalCards = availableCharacters.length
+  const indexOfLastCard = page * cardsInPage
+  const indexOfFirstCard = indexOfLastCard - cardsInPage 
+  const currentCards = availableCharacters.slice(indexOfFirstCard, indexOfLastCard);
+  const paginate = pagenumber => setPage(pagenumber)
+
 
   useEffect(() => {
     dispatch(fetchAsyncCharacters())
-  }, [])
+  }, [dispatch])
 
-
+  const handleClearSearch = () => {
+    // console.log('clicou no btn handleClearSearch')
+    dispatch(setSearch(''))
+    dispatch(fetchAsyncCharacters())
+  }
 
   return (
     <div className="container">
       <div className="actions">
         <h3>Catálogo de Personagens</h3>
-        <button className="danger">Limpar filtro</button>
+        <button 
+          onClick={handleClearSearch}
+          className="danger">
+          Limpar filtro
+        </button>
       </div>
-      <Filtros />
-      <Paginacao />
-      <div className='spinner' >
-        {isLoading ? <Spinner animation='border' variant='primary'/> : null}
-      </div>
-      <GradePersonagens selector={availableCharacterSelector} />
-      <Paginacao />
+      <Filtros/>
+      <Loading />
+      <Paginacao 
+							quantTotalCards={totalCards}
+							cardsInPage={cardsInPage}
+              paginate={paginate}
+       />
+      <GradePersonagens data={currentCards}/>
+      <Paginacao 
+							quantTotalCards={totalCards}
+							cardsInPage={cardsInPage}
+              paginate={paginate}
+       />
     </div>
   );
 };
