@@ -58,9 +58,7 @@ export const pageSelector = (state) => state.character.page;
 
 
 //Actions
-export const fetchAsyncCharacters = () => ({
-  type: 'character/fetchAsyncCharacters'
-})
+export const fetchAsyncCharacters = () => ({type: 'character/fetchAsyncCharacters'})
 export const addCharacter = (character) => ({ type: 'character/addCharacter', payload: character })
 export const removeCharacter = (id) => ({ type: 'character/removeCharacter', payload: id })
 export const setAvailableCharacters = (character) => ({ type: 'character/setAvailableCharacters', payload: character})

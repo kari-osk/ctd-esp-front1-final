@@ -11,7 +11,7 @@ import "./grade-personagem.css";
 const GradePersonagem = ({data}) => {
 
   return (
-    <div className='grade-personagens'  >
+    <div className='grade-personagens'>
       {data.map((character) => (
         <div key={character.id}>
           <CardPersonagem key={character.id} character={character} />

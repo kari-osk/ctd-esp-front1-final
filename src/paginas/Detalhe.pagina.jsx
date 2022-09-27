@@ -1,9 +1,7 @@
-import {useEffect} from 'react'
+
 import BotaoFavorito from "../componentes/botoes/botao-favorito.componente";
 import CardEpisodio from "../componentes/episodios/card-episodio.componente";
-import GradePersonagem from '../componentes/personagens/grade-personagens.componente';
-import { useDispatch, useSelector } from 'react-redux';
-import {selectedCharacterSelector } from '../features/character/characterSlice';
+
 
 import "./Pagina.css";
 import { fetchAsyncCharacters } from '../features/sagas/characterSagas';
@@ -21,21 +19,10 @@ import { fetchAsyncCharacters } from '../features/sagas/characterSagas';
  */
 const PaginaDetalhe = () => {
   
-  const dispatch = useDispatch()
-  const selected = useSelector(selectedCharacterSelector)
 
-    useEffect(() => {
-    dispatch()
-  }, [dispatch])
-  
   return (
     <div className="container">
-    <h1>detalhes</h1>
-    <GradePersonagem data={selected}/>
-
-
-
-      {/* <h3>Rick Sanchez</h3>
+    <h3>Rick Sanchez</h3>
       <div className={"detalhe"}>
         <div className={"detalhe-header"}>
           <img
@@ -55,7 +42,7 @@ const PaginaDetalhe = () => {
         <CardEpisodio />
         <CardEpisodio />
         <CardEpisodio />
-      </div> */}
+      </div>
     </div>
   );
 };

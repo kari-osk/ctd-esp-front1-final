@@ -25,10 +25,16 @@
   font-size: 32px;
 }
 
+.grade-personagens{
+  width: 100%;
+  text-align: center;
+}
+
 .episodios-grade {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .favorite_msg {

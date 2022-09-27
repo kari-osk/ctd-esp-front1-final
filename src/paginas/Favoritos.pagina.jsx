@@ -7,7 +7,7 @@ import { favoriteListSelector, clearFavorite, getFavorites, removeCharacter } fr
 import './Pagina.css'
 
 /**
- * Esta é a página de favoritos. Aqui são apresentados todos os personagens marcados como favoritos, caso não haja favoritos é mostrado a mensageam "Ainda não tem personagem favorito" e o botão para voltar a página Inicio. 
+ * Página de favoritos. Aqui são apresentados todos os personagens marcados como favoritos, caso não haja favoritos é mostrado a mensageam "Ainda não tem personagem favorito" e o botão para voltar a página Início. 
  *
  * Uso:
  * ``` <PaginaFavoritos /> ```
@@ -49,7 +49,9 @@ const PaginaFavoritos = () => {
 
       { hasFavorite
         ?
-        <GradePersonagens data={favorites} /> 
+        <div className='episodios-grade'>
+          <GradePersonagens data={favorites}/> 
+        </div>
         : 
         <div className='favorite_msg'>
           <h3>Ainda não tem personagem favorito</h3>

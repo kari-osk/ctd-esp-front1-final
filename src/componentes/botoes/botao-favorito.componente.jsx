@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addCharacter, removeCharacter, selectedCharacterSelector } from '../../features/character/characterSlice';
+import { addCharacter, favoriteListSelector, removeCharacter, selectedCharacterSelector} from '../../features/character/characterSlice';
 import star from '../../image/star.png'
 import starFilled from '../../image/star-filled.png'
 
@@ -28,6 +28,7 @@ const BotaoFavorito = ({ isFavorito, favoriteId }) => {
     const handleClickAdd = () => {
       dispatch(addCharacter(favoriteId))
   }
+
 
   return (
     <div className='botao-favorito'>
