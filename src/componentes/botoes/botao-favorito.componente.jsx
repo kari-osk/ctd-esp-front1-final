@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addCharacter, favoriteListSelector, removeCharacter, selectedCharacterSelector} from '../../features/character/characterSlice';
+import { addCharacter, getFavorites, removeCharacter, selectedCharacterSelector, } from '../../features/character/characterSlice';
 import star from '../../image/star.png'
 import starFilled from '../../image/star-filled.png'
 

@@ -56,7 +56,7 @@ const PaginaFavoritos = () => {
         <div className='favorite_msg'>
           <h3>Ainda não tem personagem favorito</h3>
           <button className='primary'>
-            <Link to='/' className='link_home_btn'>Escolha na página ínicio</Link>
+            <Link to='/' className='link_home_btn'>Escolha na página Início</Link>
           </button>
         </div> 
       }
