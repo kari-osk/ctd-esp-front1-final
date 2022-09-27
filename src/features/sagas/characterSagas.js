@@ -1,5 +1,5 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects'
-import {  setAvailableCharacters, setIsLoading, searchCharacterSelector, selectedCharacterSelector } from '../character/characterSlice'
+import {  setAvailableCharacters, setIsLoading, searchCharacterSelector } from '../character/characterSlice'
 
 /**
  *  Função geradora Saga.
@@ -25,7 +25,7 @@ export function* fetchAsyncCharacters() {
   })
 
   if (response.status !== 200) {
-    alert('Não existe personagem com esse nome')
+    alert('Opss... Não existe personagem com esse nome. Pesquise novamente!')
     yield put(setIsLoading(false))
   }
   else {
@@ -35,16 +35,6 @@ export function* fetchAsyncCharacters() {
   }
 }
 
-// export function* fetchDetails() {
-//   yield put(setIsLoading(true))
-//   const details = yield select(selectedCharacterSelector)
-
-//   let baseUrl = 'https://rickandmortyapi.com/api/episode'
-//   if (details) {
-//     baseUrl = `${baseUrl}?id=${details.id}`
-//   }
-
-// }
 
 
 export default function* characterSagas() {
